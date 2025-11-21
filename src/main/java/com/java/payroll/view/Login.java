@@ -55,7 +55,7 @@ public class Login extends javax.swing.JFrame {
         loginBtn1.addActionListener(this::loginBtn1ActionPerformed);
 
         userOrIdLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        userOrIdLabel1.setText("Username/EmployeeID");
+        userOrIdLabel1.setText("EmployeeID");
 
         userOrIdTextField1.setForeground(new java.awt.Color(204, 204, 204));
         userOrIdTextField1.setText(" e.g., john.smith or EMP001");
@@ -141,7 +141,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtn1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_loginBtn1ActionPerformed
 
     private void userOrIdTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userOrIdTextField1ActionPerformed

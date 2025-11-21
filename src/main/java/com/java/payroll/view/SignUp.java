@@ -4,11 +4,15 @@
  */
 package com.java.payroll.view;
 
+//import com.java.payroll.connection.DatabaseConn;
+
+
 /**
  *
  * @author school
  */
 public class SignUp extends javax.swing.JFrame {
+    
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SignUp.class.getName());
 
@@ -16,6 +20,7 @@ public class SignUp extends javax.swing.JFrame {
      * Creates new form SignUp
      */
     public SignUp() {
+       // DatabaseConn.getConnection();
         initComponents();
     }
 
@@ -38,6 +43,7 @@ public class SignUp extends javax.swing.JFrame {
         setPasswordTextField1 = new javax.swing.JTextField();
         setPasswordLabel1 = new javax.swing.JLabel();
         signUpBtn1 = new javax.swing.JButton();
+        fullAccountLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -98,6 +104,15 @@ public class SignUp extends javax.swing.JFrame {
         signUpBtn1.setOpaque(true);
         signUpBtn1.addActionListener(this::signUpBtn1ActionPerformed);
 
+        fullAccountLabel.setForeground(new java.awt.Color(51, 102, 255));
+        fullAccountLabel.setText("Register full account?");
+        fullAccountLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        fullAccountLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fullAccountLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,23 +120,29 @@ public class SignUp extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(setPasswordLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(empIdLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fullNameLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fullNameTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(empIdTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(setPasswordTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(signUpLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(signUpBtn1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addComponent(haveAnAccountLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(signUpInfoLabel1)))
-                .addContainerGap(117, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(101, 101, 101)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(setPasswordLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(empIdLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(fullNameLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(fullNameTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(empIdTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(setPasswordTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(signUpLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(signUpBtn1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(182, 182, 182)
+                                .addComponent(haveAnAccountLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(208, 208, 208)
+                                .addComponent(signUpInfoLabel1)))
+                        .addGap(0, 111, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(fullAccountLabel)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,7 +167,9 @@ public class SignUp extends javax.swing.JFrame {
                 .addComponent(signUpBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(haveAnAccountLabel1)
-                .addGap(55, 55, 55))
+                .addGap(34, 34, 34)
+                .addComponent(fullAccountLabel)
+                .addContainerGap())
         );
 
         pack();
@@ -162,7 +185,8 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_fullNameTextField1ActionPerformed
 
     private void haveAnAccountLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_haveAnAccountLabel1MouseClicked
-        // TODO add your handling code here:
+       this.setVisible(false);
+       new Login().setVisible(true);
     }//GEN-LAST:event_haveAnAccountLabel1MouseClicked
 
     private void setPasswordTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setPasswordTextField1ActionPerformed
@@ -173,34 +197,23 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_signUpBtn1ActionPerformed
 
+    private void fullAccountLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fullAccountLabelMouseClicked
+        this.setVisible(false);
+        new FullSignUp().setVisible(true);
+    }//GEN-LAST:event_fullAccountLabelMouseClicked
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new SignUp().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel empIdLabel1;
     private javax.swing.JTextField empIdTextField1;
+    private javax.swing.JLabel fullAccountLabel;
     private javax.swing.JLabel fullNameLabel1;
     private javax.swing.JTextField fullNameTextField1;
     private javax.swing.JLabel haveAnAccountLabel1;
@@ -211,3 +224,6 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel signUpLabel1;
     // End of variables declaration//GEN-END:variables
 }
+
+//Custom Methods
+

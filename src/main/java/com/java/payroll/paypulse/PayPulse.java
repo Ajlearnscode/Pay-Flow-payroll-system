@@ -4,7 +4,8 @@
 
 package com.java.payroll.paypulse;
 
-import com.java.payroll.view.Login;
+
+import com.java.payroll.view.MainApplication;
 
 /**
  *
@@ -13,6 +14,6 @@ import com.java.payroll.view.Login;
 public class PayPulse {
 
     public static void main(String[] args) {
-        new Login().setVisible(true);
+        MainApplication.main(args);
     }
 }

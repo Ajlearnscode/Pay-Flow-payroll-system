@@ -41,29 +41,38 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="setPasswordLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="empIdLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="fullNameLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="fullNameTextField1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="empIdTextField1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="setPasswordTextField1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="signUpLabel1" alignment="1" min="-2" pref="332" max="-2" attributes="0"/>
-                          <Component id="signUpBtn1" alignment="0" pref="349" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="setPasswordLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="empIdLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fullNameLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fullNameTextField1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="empIdTextField1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="setPasswordTextField1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="signUpLabel1" alignment="1" min="-2" pref="332" max="-2" attributes="0"/>
+                                  <Component id="signUpBtn1" alignment="0" pref="349" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
+                              <Component id="haveAnAccountLabel1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="208" max="-2" attributes="0"/>
+                              <Component id="signUpInfoLabel1" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
+                      <EmptySpace min="0" pref="111" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
-                      <Component id="haveAnAccountLabel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="208" max="-2" attributes="0"/>
-                      <Component id="signUpInfoLabel1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="fullAccountLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="117" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -90,7 +99,9 @@
               <Component id="signUpBtn1" min="-2" pref="63" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="haveAnAccountLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+              <Component id="fullAccountLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -231,6 +242,20 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="signUpBtn1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="fullAccountLabel">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="33" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Register full account?"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fullAccountLabelMouseClicked"/>
       </Events>
     </Component>
   </SubComponents>
