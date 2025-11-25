@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLSyntaxErrorException;
 import java.sql.Statement;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
@@ -27,12 +28,14 @@ public class FullSignUp extends javax.swing.JFrame implements UserManagement {
     private static Connection myConn = null;
     
     
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new FullSignUp().setVisible(true));
     }
+
 
 
     public FullSignUp() {
@@ -54,7 +57,7 @@ public class FullSignUp extends javax.swing.JFrame implements UserManagement {
             String year = yearTextField.getText().trim();
             
             if(userId.isEmpty() || fullName.isEmpty() || email.isEmpty() || trn.isEmpty() || street.isEmpty() || parish.isEmpty() || country.isEmpty() || city.isEmpty() || gender.isEmpty() || day.isEmpty() || month.isEmpty() || year.isEmpty()){
-                JOptionPane.showMessageDialog(null, "Empty fields detected!", "Entry status.", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Empty fields detected!", "Entry status.", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
             
@@ -64,7 +67,7 @@ public class FullSignUp extends javax.swing.JFrame implements UserManagement {
             
             boolean isAdded = createFull(new User( userId,  fullName,  email,  trn,  country,  street,  city,  parish,  gender,  dayCon,  monthCon,  yearCon));
             if(isAdded){
-                JOptionPane.showMessageDialog(null, "User added successfully", "Creation Status", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "User added successfully", "Creation Status", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
@@ -525,8 +528,8 @@ public static Connection getConnection() {
     @Override
     public boolean createFull(User user) {
      //   throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-         String sql = "INSERT INTO payflowdb.Staff (id, email, trn, country, street, city, parish, gender, day, month, year)" + 
-                "VALUES ('"+user.getUserId()+"', '"+user.getEmail()+"', '"+user.getTrn()+"', '"+user.getCountry()+"', '"+user.getStreet()+"', '"+user.getCity()+"', '"+user.getParish()+"', '"+user.getGender()+"', '"+user.getDay()+"', '"+user.getMonth()+"', '"+user.getYear()+"');";
+         String sql = "INSERT INTO payflowdb.Staff (id, fullName, email, trn, country, street, city, parish, gender, day, month, year)" + 
+                "VALUES ('"+user.getUserId()+"','"+user.getFullName()+"' ,'"+user.getEmail()+"', '"+user.getTrn()+"', '"+user.getCountry()+"', '"+user.getStreet()+"', '"+user.getCity()+"', '"+user.getParish()+"', '"+user.getGender()+"', '"+user.getDay()+"', '"+user.getMonth()+"', '"+user.getYear()+"');";
         try {
             stmt = myConn.createStatement();
         int affectedRows;
