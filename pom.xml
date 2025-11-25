@@ -13,6 +13,5 @@
             <version>9.5.0</version>
         </dependency>
     </dependencies>
-
-
+    <name>PayPulse</name>
 </project>
