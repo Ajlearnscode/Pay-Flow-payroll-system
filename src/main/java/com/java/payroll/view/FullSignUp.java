@@ -54,7 +54,7 @@ public class FullSignUp extends javax.swing.JFrame implements UserManagement {
             String year = yearTextField.getText().trim();
             
             if(userId.isEmpty() || fullName.isEmpty() || email.isEmpty() || trn.isEmpty() || street.isEmpty() || parish.isEmpty() || country.isEmpty() || city.isEmpty() || gender.isEmpty() || day.isEmpty() || month.isEmpty() || year.isEmpty()){
-                JOptionPane.showMessageDialog(null, "Empty fields detected!", "Entry status.", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Empty fields detected!", "Entry status.", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
             
@@ -64,7 +64,7 @@ public class FullSignUp extends javax.swing.JFrame implements UserManagement {
             
             boolean isAdded = createFull(new User( userId,  fullName,  email,  trn,  country,  street,  city,  parish,  gender,  dayCon,  monthCon,  yearCon));
             if(isAdded){
-                JOptionPane.showMessageDialog(null, "User added successfully", "Creation Status", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "User added successfully", "Creation Status", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
@@ -456,7 +456,7 @@ public static Connection getConnection() {
 
     String url = "jdbc:mysql://localhost:3306/payflowdb?useSSL=false&serverTimezone=UTC";
     String username = "root";
-    String password = "";  // Your local DB password
+    String password = "";  
 
     try {
         // Load driver (optional but safer in NetBeans)
@@ -497,12 +497,28 @@ public static Connection getConnection() {
     
     
     
-    
     @Override
     public boolean create(User user) {
-      //  throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        
-        return false;
+     // ⚠️ WARNING: THIS METHOD USES INSECURE SQL CONCATENATION (VULNERABLE TO SQL INJECTION)
+     
+     // 1. Construct the SQL INSERT statement for basic user fields
+     // NOTE: This assumes 'password' and 'fullName' columns exist in your Staff table.
+     String sql = "INSERT INTO payflowdb.Staff (id, fullName, password)" + 
+            "VALUES ('"+user.getUserId()+"', '"+user.getFullName()+"', '"+user.getPassword()+"');";
+     
+     try {
+         // Use the shared, non-secure Statement object
+         stmt = myConn.createStatement();
+         int affectedRows = stmt.executeUpdate(sql);
+         
+         return affectedRows == 1; // Return true if one row was successfully inserted
+
+     } catch(SQLSyntaxErrorException ssee){
+         System.out.println("SQL Syntax Error during basic create: " + ssee.getMessage());
+     } catch (SQLException ex) {
+         System.getLogger(FullSignUp.class.getName()).log(System.Logger.Level.ERROR, "SQL Error during basic create", ex);
+     }
+     return false;
     }
 
     @Override
@@ -518,20 +534,22 @@ public static Connection getConnection() {
     @Override
     public void update(User user) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-       
-      
+        
+        
     }
-
+    
     @Override
+    
     public boolean createFull(User user) {
-     //   throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-         String sql = "INSERT INTO payflowdb.Staff (id, email, trn, country, street, city, parish, gender, day, month, year)" + 
-                "VALUES ('"+user.getUserId()+"', '"+user.getEmail()+"', '"+user.getTrn()+"', '"+user.getCountry()+"', '"+user.getStreet()+"', '"+user.getCity()+"', '"+user.getParish()+"', '"+user.getGender()+"', '"+user.getDay()+"', '"+user.getMonth()+"', '"+user.getYear()+"');";
+     //   throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // ⚠️ WARNING: THIS METHOD USES INSECURE SQL CONCATENATION (VULNERABLE TO SQL INJECTION)
+        String sql = "INSERT INTO payflowdb.Staff (id, fullName, email, trn, country, street, city, parish, gender, day, month, year)" + 
+             "VALUES ('"+user.getUserId()+"', '"+user.getFullName()+"', '"+user.getEmail()+"', '"+user.getTrn()+"', '"+user.getCountry()+"', '"+user.getStreet()+"', '"+user.getCity()+"', '"+user.getParish()+"', '"+user.getGender()+"', '"+user.getDay()+"', '"+user.getMonth()+"', '"+user.getYear()+"');";
         try {
             stmt = myConn.createStatement();
         int affectedRows;
             affectedRows = stmt.executeUpdate(sql);
-              return affectedRows == 1;
+             return affectedRows == 1;
         }catch(SQLSyntaxErrorException ssee){
             System.out.println(ssee.getMessage());
         }catch (SQLException ex) {
@@ -539,7 +557,7 @@ public static Connection getConnection() {
         }
         return false;
     }
-
+    
     @Override
     public User deleteFull(User user) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

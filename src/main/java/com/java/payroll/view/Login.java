@@ -4,21 +4,84 @@
  */
 package com.java.payroll.view;
 
-/**
- *
- * @author school
- */
+import com.java.payroll.employee.DataAccessObject;
+import com.java.payroll.user.User;
+import javax.swing.JOptionPane;
+
 public class Login extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
 
+    // 1. Instantiate the Data Access Object (DAO)
+    private final DataAccessObject userDAO = new DataAccessObject();
     /**
      * Creates new form SignUp
      */
     public Login() {
-        initComponents();
-    }
+    initComponents();
+    
+    // 2. Safely add the custom sign-in logic to the login button
+    loginBtn1.addActionListener(new java.awt.event.ActionListener() {
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            
+            // --- Logic starts here, safe from UI designer ---
+            
+            // 1. GET INPUT (Fields are accessible by their generated variable names)
+            String employeeID = userOrIdTextField1.getText().trim();
+            // String password = new String(passwordTextField1.getPassword()).trim(); // If password field was a JPasswordField
+            
+            if (employeeID.isEmpty()) {
+                 JOptionPane.showMessageDialog(Login.this, "Please enter your Employee ID.", 
+                                              "Sign In Error", JOptionPane.ERROR_MESSAGE);
+                 return;
+            }
 
+            // 2. PREPARE INPUT OBJECT
+            User inputUser = new User();
+            inputUser.setUserId(employeeID);
+            
+            // 3. CALL DATABASE (Retrieve the user record)
+            User employee = userDAO.retrieve(inputUser);
+            
+            // 4. CHECK FOR EXISTENCE (Sentinel Check: userId equals "")
+            if (employee.getUserId().equals("")) { 
+                
+                // --- SIGN-IN DENIED (User Not Found) ---
+                JOptionPane.showMessageDialog(Login.this, 
+                        "Employee ID (" + employeeID + ") not found. Check your number and try again.", 
+                        "Login Failed", 
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // 5. SIGN-IN SUCCESSFUL 🎉
+            // Since 'fullName' is empty in your Staff table, we use the email prefix for a greeting.
+            String welcomeName = employee.getEmail().split("@")[0]; 
+            
+            JOptionPane.showMessageDialog(null,
+                        "Welcome, " + welcomeName + "! Sign-in successful.",
+                        "Login Success",
+                        JOptionPane.INFORMATION_MESSAGE);
+            
+            // 6. Navigation: Close login frame and open the next view.
+                        try {
+                Login.this.dispose(); 
+                // Attempt to open the dashboard
+                new com.java.payroll.employee.EmployeeDashboard(employee).setVisible(true);
+
+            } catch (Exception ex) {
+                // This will display any hidden errors preventing the dashboard from opening
+                JOptionPane.showMessageDialog(null, 
+                    "Dashboard failed to load: " + ex.getMessage(), 
+                    "Runtime Error", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
+            } 
+            
+           
+        }
+    });
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

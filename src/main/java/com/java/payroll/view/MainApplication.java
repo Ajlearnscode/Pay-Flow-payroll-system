@@ -40,9 +40,11 @@ public class MainApplication extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> new MainApplication().setVisible(true));
+    System.out.println("MAIN STARTED");
+    java.awt.EventQueue.invokeLater(() -> {
         new Login().setVisible(true);
-    }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
