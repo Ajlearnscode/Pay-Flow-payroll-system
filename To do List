@@ -1,0 +1,25 @@
+Top Panel with welcome text:
+
+The drop down menu options should carry out specific functions: (not mandatory right now)
+# View Profile - Shoudld redirect the current user to a place where they are able to update their user information.
+# Settings - This should bring the user to the settings option where the use will be presented with various settings options
+# Restart - This should restart the application and database connection and let the user re-enter their credentials
+# Help - This should present the user with the company policies, FAQ, Terms and Services, Trouble Shoot options and a caontact area to get in touch with I.T or admin help
+
+First Row:
+The words in '{ }' should be replaced with the specific information asked for by the user
+
+Second Row:
+Quick Self Service
+The Go to Payslips button should redirect the user to the 'Acess Payslips' tab
+The 'Go to Benefits' button should redirect the user to the 'Request Benefits' tab
+The 'Go to Budget' button should redirect the user to the 'My Expense Projection' tab
+The 'Go to Working Hours' button should redirect the user to the 'View Working Hours' tab
+
+Third Row:
+Announcemntes Panel
+#My Announcements - The user should be able to view the messages send directly to theem by Admin or CEO/MANAGER
+#Company Announcements - The user should be able to view the company announcements sent by admins and MANAGER/CEO
+#System Maintenance - The user should be able to receive messages from the tech team about any updates, changes or system related information
+#Refresh Button is supposed to referesh the 'Announcements' sections only, allowing the employees to stay up to date with what messages are being sent 
+  ## In addition to the referesh button a logic can be implemented to refresh the announcements area every 30 seconds one a mini check box is pressed confirming that the user wants this feature.
