@@ -459,7 +459,7 @@ public static Connection getConnection() {
 
     String url = "jdbc:mysql://localhost:3306/payflowdb?useSSL=false&serverTimezone=UTC";
     String username = "root";
-    String password = "";  // Your local DB password
+    String password = "";  
 
     try {
         // Load driver (optional but safer in NetBeans)
@@ -490,22 +490,31 @@ public static Connection getConnection() {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
     @Override
     public boolean create(User user) {
-      //  throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        
-        return false;
+     // ⚠️ WARNING: THIS METHOD USES INSECURE SQL CONCATENATION (VULNERABLE TO SQL INJECTION)
+     
+     // 1. Construct the SQL INSERT statement for basic user fields
+     // NOTE: This assumes 'password' and 'fullName' columns exist in your Staff table.
+     String sql = "INSERT INTO payflowdb.Staff (id, fullName, password)" + 
+            "VALUES ('"+user.getUserId()+"', '"+user.getFullName()+"', '"+user.getPassword()+"');";
+     
+     try {
+         // Use the shared, non-secure Statement object
+         stmt = myConn.createStatement();
+         int affectedRows = stmt.executeUpdate(sql);
+         
+         return affectedRows == 1; // Return true if one row was successfully inserted
+
+     } catch(SQLSyntaxErrorException ssee){
+         System.out.println("SQL Syntax Error during basic create: " + ssee.getMessage());
+     } catch (SQLException ex) {
+         System.getLogger(FullSignUp.class.getName()).log(System.Logger.Level.ERROR, "SQL Error during basic create", ex);
+     }
+     return false;
     }
 
     @Override
@@ -521,11 +530,12 @@ public static Connection getConnection() {
     @Override
     public void update(User user) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-       
-      
+        
+        
     }
-
+    
     @Override
+    
     public boolean createFull(User user) {
      //   throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
          String sql = "INSERT INTO payflowdb.Staff (id, fullName, email, trn, country, street, city, parish, gender, day, month, year)" + 
@@ -534,7 +544,7 @@ public static Connection getConnection() {
             stmt = myConn.createStatement();
         int affectedRows;
             affectedRows = stmt.executeUpdate(sql);
-              return affectedRows == 1;
+             return affectedRows == 1;
         }catch(SQLSyntaxErrorException ssee){
             System.out.println(ssee.getMessage());
         }catch (SQLException ex) {
@@ -542,7 +552,7 @@ public static Connection getConnection() {
         }
         return false;
     }
-
+    
     @Override
     public User deleteFull(User user) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
